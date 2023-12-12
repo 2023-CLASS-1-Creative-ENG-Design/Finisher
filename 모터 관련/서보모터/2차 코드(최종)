@@ -1,0 +1,80 @@
+#include <Arduino.h>
+#include <Servo.h>
+#define ButtonPin 3
+
+Servo motor1;
+Servo motor2;
+Servo motor3;
+
+int m1_PIN = 11;
+int m2_PIN = 9;
+int m3_PIN = 10;
+
+void MotorOperate_1(Servo);
+void MotorOperate_2(Servo);
+void MotorOperate_3(Servo);
+
+void setup() {
+   Serial.begin(9600);
+  pinMode(ButtonPin, INPUT);
+  motor1.attach(m1_PIN);
+  motor2.attach(m2_PIN);
+  motor3.attach(m3_PIN);
+
+  motor1.write(167);
+  motor2.write(11);
+  motor3.write(173);
+ }
+
+ 
+void loop() {
+  //int init_m1 = motor1.read();
+  //int init_m2 = motor2.read();
+  //int init_m3 = motor3.read();
+  //Serial.println(init_m1);
+  //Serial.println(init_m2);
+  //Serial.println(init_m3);
+  //int button = digitalRead(ButtonPin);
+  //Serial.println(button);
+
+ if(digitalRead(ButtonPin) == 0){
+  //motor1.write(57);
+  //motor2.write(121);
+  //motor3.write(63);
+
+  MotorOperate_1(motor1);
+  MotorOperate_2(motor2);
+  MotorOperate_1(motor1);
+  MotorOperate_3(motor3);
+ }
+}
+
+void MotorOperate_1(Servo motor){
+  int init = 167;
+  int angle = -110;
+
+  motor.write(init + angle);
+  delay(1500);
+  motor.write(init);
+  delay(1500);
+}
+
+void MotorOperate_2(Servo motor){
+  int init = 11;
+  int angle = 110;
+
+  motor.write(init + angle);
+  delay(1500);
+  motor.write(init);
+  delay(1500);
+}
+
+void MotorOperate_3(Servo motor){
+  int init = 173;
+  int angle = -110;
+
+  motor.write(init + angle);
+  delay(1500);
+  motor.write(init);
+  delay(1500);
+}
