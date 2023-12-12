@@ -1,0 +1,35 @@
+#include <Arduino.h>
+#include <Servo.h>
+#define PIN1 2
+#define PIN2 3
+#define PIN3 4
+#define ButtonPin 7
+
+Servo motor1;
+Servo motor2;
+Servo motor3;
+
+void MotorOperate(Servo);
+
+void setup() {
+  pinMode(ButtonPin, INPUT_PULLUP);
+  motor1.attach(PIN1);
+  motor2.attach(PIN2);
+  motor3.attach(PIN3);
+ }
+
+void loop() {
+ int button = digitalRead(ButtonPin);
+ if(button == 1){
+  MotorOperate(motor1);
+  MotorOperate(motor2);
+  MotorOperate(motor3);
+ }
+}
+
+void MotorOperate(Servo motor){
+  motor.write(120);
+  delay(1000);
+  motor.write(0);
+  delay(1000);
+}
